@@ -1,0 +1,23 @@
+import cv2
+import numpy as np
+
+# Загрузите изображение
+image = cv2.imread('path_to_your_image.jpg')
+
+# Преобразуйте изображение в массив BGR
+bgr_image = image
+
+# Определите цвет, который вы ищете (в формате BGR)
+target_color = (0, 255, 0)  # Зеленый цвет в формате BGR
+
+# Создайте маску, где все пиксели, близкие к целевому цвету, будут установлены в 255
+mask = cv2.inRange(bgr_image, target_color, target_color)
+
+# Подсчитайте количество пикселей в маске
+pixel_count = np.sum(mask)
+
+# Если количество пикселей больше некоторого порога, считаем, что цвет найден
+if pixel_count > 1000:
+    print("Цвет найден!")
+else:
+    print("Цвет не найден.")
